@@ -1,19 +1,29 @@
-version: '3.1'
+version: '3.7'
 
 services:
 
-  db:
+  mysql-db:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    volumes:
+      - ./databases:/usr/databases
     ports:
       - 3306:3306
       - 33060:33060
     environment:
       MYSQL_ROOT_PASSWORD: "P@ssw0rd"
 
-  adminer:
-    image: adminer
-    restart: always
+  mysql-workbench:
+    image: lscr.io/linuxserver/mysql-workbench:latest
+    container_name: mysql-workbench
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./databases:/usr/databases
     ports:
-      - 8080:8080
+      - 3000:3000
+    cap_add:
+      - IPC_LOCK
+    restart: unless-stopped
