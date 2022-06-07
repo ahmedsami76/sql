@@ -4,6 +4,8 @@ services:
 
   mysql-db:
     image: mysql:latest
+    container_name: mysql-db
+    hostname: mysql-db
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
@@ -17,6 +19,7 @@ services:
   mysql-workbench:
     image: lscr.io/linuxserver/mysql-workbench:latest
     container_name: mysql-workbench
+    hostname: mysql-workbench
     environment:
       - PUID=1000
       - PGID=1000
