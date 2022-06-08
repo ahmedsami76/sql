@@ -1,4 +1,4 @@
-# Creating and using databases 
+# 1. Creating and using databases 
 CREATE DATABASE lucy;
 CREATE DATABASE IF NOT EXISTS lucy;
 
@@ -10,7 +10,7 @@ DROP DATABASE IF NOT EXISTS lucy;
 
 # Check folder structure
 
-# Creating TABLES
+# 2. Creating TABLES
 DROP DATABASE IF EXISTS sakila;
 CREATE DATABASE sakila;
 # Check folder structure
@@ -157,4 +157,89 @@ CREATE TABLE customer_mod (
     KEY idx_names_email (first_name, last_name, email)
     );
 
-SHOW INDEX FROM customer_mod;
+# drop and re import sakila database
+# examine indexes on actor table
+SHOW INDEX FROM actor;
+
+SELECT actor_id,first_name,last_name,last_update 
+FROM actor
+WHERE last_name = 'SWANK';
+
+EXPLAIN SELECT actor_id,first_name,last_name,last_update 
+FROM actor
+WHERE last_name = 'SWANK';
+
+####
+# The AUTO_INCREMENT Feature
+SHOW CREATE TABLE actor;
+
+INSERT INTO actor VALUES (NULL, 'Magdy', 'Shatta', NOW());
+INSERT INTO actor VALUES (NULL, 'Samah', 'Anwar', NOW());
+SELECT * FROM actor;
+
+#####
+# 3. Altering Structures
+
+## Adding, Removing, and Changing Columns
+
+-- RENAME rename column only
+ALTER TABLE language RENAME COLUMN last_update TO last_updated_time;
+SHOW COLUMNS FROM language;
+
+-- CHANGE change cloumn name and specs
+ALTER TABLE language 
+CHANGE last_updated_time last_updated_time2 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+-- MODIFY Change column specs
+ALTER TABLE language MODIFY name CHAR(20) DEFAULT 'n/a';
+
+-- ADD add a new column to the TABLE
+SHOW COLUMNS FROM language;
+ALTER TABLE language ADD native_name CHAR(20) FIRST;
+SHOW COLUMNS FROM language;
+
+-- DROP to remove a column from a table 
+ALTER TABLE language DROP native_name;
+
+## Adding, Removing, and Changing Indexes
+CREATE TABLE no_pk (id INT);
+INSERT INTO no_pk VALUES (1),(2),(3);
+ALTER TABLE no_pk ADD PRIMARY KEY (id);
+DESC no_pk;
+SHOW INDEX FROM no_pk;
+ALTER TABLE no_pk DROP PRIMARY KEY;
+
+
+## Renaming Tables and Altering Other Structures
+-- Rename a table
+ALTER TABLE language RENAME TO languages;
+-- same as 
+RENAME TABLE languages TO language; 
+
+-- You can use rename to move tables between databases 
+CREATE DATABASE sakila_new;
+RENAME TABLE sakila.language TO sakila_new.language;
+
+# 4. Deleting Structures
+## Dropping Databases
+
+DROP DATABASE sakila_new;
+DROP DATABASE IF EXISTS sakila_new;
+
+# Removing Tables
+CREATE TABLE temp (id SERIAL PRIMARY KEY);
+DROP TABLE temp;
+DROP TABLE IF EXISTS temp;
+
+DROP TABLE IF EXISTS temp, temp1, temp2;
+SHOW WARNINGS;
+
+
+
+
+
+
+
+
+
+
