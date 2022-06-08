@@ -15,6 +15,11 @@ DESC actor;
 SHOW COLUMNS FROM actor;
 SHOW CREATE TABLES actor\G
 
+#### 
+# cleanup
+sudo apt remove mysql-server -y
+sudo apt autoremove -y 
+
 ####
 # clone repo
 git config user.name "Ahmed Sami"
@@ -25,4 +30,4 @@ cd relational-databases
 # Use Docker
 docker run -d -v /var/run/docker.sock:/tmp/docker.sock -v /etc/hosts:/tmp/hosts asami76/docker-hoster
 
-docker-compose -f mysql up
+docker-compose -f mysql.yml up -d 
