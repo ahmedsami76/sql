@@ -17,7 +17,7 @@ services:
       MYSQL_ROOT_PASSWORD: "P@ssw0rd"
 
   mysql-workbench:
-    image: lscr.io/linuxserver/mysql-workbench:latest
+    image: linuxserver/mysql-workbench:latest
     container_name: mysql-workbench
     hostname: mysql-workbench
     environment:
