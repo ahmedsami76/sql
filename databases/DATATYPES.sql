@@ -17,6 +17,7 @@
 SELECT 1;
 SELECT 1 / 2;
 SELECT SQRT(15);
+SELECT 2.1E+2, -3.98E-4;
 
 -- type conversion
 SELECT CONVERT( SQRT(15) , DECIMAL);-- will round up 
@@ -32,10 +33,16 @@ SELECT CONVERT( SQRT(15) , DECIMAL (5 , 2 )); -- will round up based on defined 
 -- tinytext (255), text (64K), mediumtext (16MB), longtext (4GB)
 -- tinyblob, blob, mediumblob, longblob (same as text but binary)
 
+SELECT _latin1'string';
+SELECT _binary'string';
+SELECT N'string'; -- national character set
+SELECT _utf8mb4'string' COLLATE utf8mb4_danish_ci;
 SELECT HEX(CAST('a' AS BINARY));
 
 -- --------------------
 -- date and time data types
 -- date, time, datetime, timestamp, year
 -- date ('0000-00-00'), time ('00:00:00'), datetime ('0000-00-00 00:00:00'), year(0000)
-
+--
+SELECT DATE'2009-11-09';
+SELECT TIMESTAMP'2012#12#31 11^30^45';

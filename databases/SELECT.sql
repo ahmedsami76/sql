@@ -1,4 +1,13 @@
 -- this is a comment 
+SELECT 1+1; # this is a comment till the end of the line
+SELECT 1+1; # this is a comment
+SELECT 1+1; /* this is a comment */
+SELECT 1+1; /* this is a comment
+that can extend to mutliple lines
+*/
+SELECT 1 + /* this can also be an in-line comment */ 1;
+
+
 SELECT 'Hello, SQL'; -- single quotes for strings
 
 SELECT "Hello, SQL"; -- double quotes for strings
@@ -14,7 +23,7 @@ SELECT "'This is a quoted text'"; -- embed different qoutes
 -- another way is to use the backslash as an escape character
 SELECT "\'This is a quoted text\'";
 SELECT "This is a single quote \' and this is a doublequote \"";
-
+SELECT "Line 1\nLine 2\nLine 3";
 SELECT "This is a path in windows C:\\my\\folder\\path";
 
 -- arithmetic
