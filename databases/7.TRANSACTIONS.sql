@@ -1,3 +1,4 @@
+-- Active: 1687117690530@@mysql-db@3306
 
 show databases;
 
@@ -22,9 +23,12 @@ UPDATE t1 SET first_name = 'ali' WHERE id = 1;
 -- start transaction
 START TRANSACTION;
 -- update t1 
-UPDATE t1 SET first_name = 'ali' WHERE id = 1;
+UPDATE t1 SET first_name = 'ahmed' WHERE id = 1;
+
+-- check the t1 rows from another session
+
 -- commit transaction
-COMMIT;
+COMMIT; -- or ROLLBACK;
 
 TABLE t1;
 
@@ -32,13 +36,26 @@ TABLE t1;
 START TRANSACTION;
 -- update t1
 UPDATE t1 SET first_name = 'fekri' WHERE id = 1;
+
+ROLLBACK;
+
 TABLE t1;
+
+
 -- autocommit
+SET autocommit = 0;
+
+UPDATE t1 SET first_name = 'fekri' WHERE id = 1;
+ROLLBACK;
+
 SET autocommit = 1;
 
-START TRANSACTION;
--- update t1
-UPDATE t1 SET first_name = 'abc' WHERE id = 1;
-TABLE t1;
+UPDATE t1 SET first_name = 'fekri' WHERE id = 1;
 
-COMMIT;
+-- acid features
+-- atomicity
+-- consistency
+-- isolation
+-- durability
+
+-- buffer pool, redo logs, flush to disk 
