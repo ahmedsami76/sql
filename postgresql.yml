@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:  
+  pg-db:
+    image: postgres
+    restart: always
+    container_name: pg-db
+    hostname: pg-db
+    environment:
+      POSTGRES_PASSWORD: P@ssw0rd
+
+  adminer:
+    image: adminer
+    hostname: pg-adminer
+    container_name: pg-adminer
+    volumes:
+      - ./databases:/usr/databases
+    restart: always
+    ports:
+      - 8080:8080
+
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    container_name: jupyter
+    hostname: jupyter
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./databases:/home/jovyan/
+    ports:
+      - 8888:8888
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    hostname: pgadmin
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "ahmed.samy@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "P@ssw0rd"
+    volumes:
+      - ./databases:/usr/databases
+    restart: always
+    ports:
+      - 6060:80
+
+    
