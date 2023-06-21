@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
   
   jupyter:
-    image: jupyter/datascience-notebook:latest
+    image: asami76/allspark:latest
     container_name: jupyter
     hostname: jupyter
     environment:

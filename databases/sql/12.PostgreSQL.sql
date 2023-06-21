@@ -38,4 +38,12 @@ INSERT INTO t1 VALUES (2, 'aya'), (3, 'john');
 -- create a table t2 based on t1
 CREATE TABLE t2 AS TABLE t1;
 
+-- create a new table type 
+CREATE TYPE t1_type AS (id int, first_name varchar(30));
+-- create a table based on that TYPE
+CREATE TABLE t3 OF t1_type;
+
+-- create a new data type
+CREATE DOMAIN t1_domain AS varchar(30);
+
 
