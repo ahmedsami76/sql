@@ -93,3 +93,31 @@ CREATE TABLE t6 (
     PRIMARY KEY (id)
     );
 
+-- insert a few rows into t6
+INSERT INTO t6 (first_name) VALUES ('ahmed'), ('ali'), ('aya');
+TABLE t6;
+
+-- insert a row with existing id
+INSERT INTO t6 VALUES (1, 'sami'); -- error
+
+-- create a table t7 with foreign key
+CREATE TABLE t7 (
+    id INT, 
+    class VARCHAR(20),
+    FOREIGN KEY (id) REFERENCES t6(id)
+    );
+TABLE t7;
+
+-- insert a few rows into t7
+INSERT INTO t7 
+VALUES  (1, 'Math'), 
+        (1, 'English'), 
+        (2, 'Math'), 
+        (3, 'Science'),
+        (3, 'Math');        
+TABLE t7;
+
+-- insert a row with non-existing id
+INSERT INTO t7 VALUES (4, 'Math'); -- error
+
+-- reverse engineer in mysql workbench

@@ -30,3 +30,16 @@ services:
     cap_add:
       - IPC_LOCK
     restart: unless-stopped
+  
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    container_name: jupyter
+    hostname: jupyter
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./databases:/home/jovyan/
+    ports:
+      - 8888:8888
+    restart: unless-stopped

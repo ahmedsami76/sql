@@ -1,2 +1,7 @@
-relational-databases/databases/.cache/*
-relational-databases/databases/.ipynb_checkpoints/*
+**/databases/.cache/**
+**/databases/.ipynb_checkpoints/**
+**/databases/.npm/**
+**/databases/.local/**
+**/databases/.vscode/**
+**/databases/.jupyter/**
+**/databases/.ipython/**
