@@ -1,3 +1,4 @@
+-- Active: 1687357724766@@mysql-db@3306
 -- this is a comment 
 SELECT 1+1; # this is a comment till the end of the line
 SELECT 1+1; # this is a comment
