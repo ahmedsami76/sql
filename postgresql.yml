@@ -8,6 +8,8 @@ services:
     hostname: pg-db
     environment:
       POSTGRES_PASSWORD: P@ssw0rd
+    volumes:
+      - ./databases:/usr/databases
 
   adminer:
     image: adminer
@@ -20,7 +22,7 @@ services:
       - 8080:8080
 
   jupyter:
-    image: jupyter/datascience-notebook:latest
+    image: asami76/allspark:latest
     container_name: jupyter
     hostname: jupyter
     environment:
@@ -43,6 +45,6 @@ services:
       - ./databases:/usr/databases
     restart: always
     ports:
-      - 6060:80
+      - "5050:80"
 
     
