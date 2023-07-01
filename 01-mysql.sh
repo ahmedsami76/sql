@@ -1,10 +1,13 @@
 ####
-# Install MySQL
-sudo apt install mysql-server -y
-sudo systemctl start mysql # if systemctl is not available, use 'service mysql start'
+docker run --rm -it -v $(pwd)/databases:/usr/databases ubuntu:latest bash
+
+# Install MySQL from root user
+apt update && apt full-upgrade -y
+apt install mysql-server -y
+service mysql start # or  'systemctl start mysql' if systemd is installed
 
 # Connect to mysql interactive shell
-sudo mysql 
+mysql 
 # To allow remote connections from root user to mysql server
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password by 'P@ssw0rd';
 
@@ -20,6 +23,7 @@ CREATE DATABASE testdb;
 # to create a table called tbl1
 USE testdb;
 CREATE TABLE tbl1 (id INT, name VARCHAR(20));
+exit
 
 # Check the file structure after creating the database and the table
 cd /var/lib/mysql
@@ -29,17 +33,15 @@ ls -l testdb
 # Download the dump file from https://dev.mysql.com/doc/index-other.html
 # make sure to download the schema and data files
 # make sure to change the path to the dump file
-SOURCE /home/sami/relational-databases/databases/sakila-db/sakila-schema.sql;
+SOURCE /usr/databases/sakila-db/sakila-schema.sql;
 USE sakila;
-SOURCE /home/sami/relational-databases/databases/sakila-db/sakila-data.sql;
+SOURCE /usr/databases/sakila-db/sakila-data.sql;
 SHOW TABLES FROM sakila;
 SELECT * FROM actor LIMIT 10;
-DESC actor;
+DESCRIBE actor;
 SHOW COLUMNS FROM actor;
-SHOW CREATE TABLES actor\G
+SHOW CREATE TABLE actor\G
 
-# to check the tables in the current database
-SHOW TABLES;
 
 #### 
 # cleanup
@@ -48,10 +50,8 @@ sudo apt autoremove -y
 
 ####
 # clone repo
-git config user.name "Ahmed Sami"
-git config user.email "ahmed.sami@yahoo.com"
-git clone https://github.com/ahmedsami76/relational-databases.git
-cd relational-databases
+git clone https://github.com/ahmedsami76/sql.git
+cd sql
 
 # Use Docker
 docker run -d -v /var/run/docker.sock:/tmp/docker.sock -v /etc/hosts:/tmp/hosts asami76/docker-hoster
