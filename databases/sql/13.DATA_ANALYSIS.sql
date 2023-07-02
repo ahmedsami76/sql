@@ -1,15 +1,61 @@
--- Active: 1688066368502@@pg-db@5432@hr
--- get the data from the below link
--- https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry/data
+-- 1. get the data from the below link
+----  https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry/data
+-- 2. save the csv file in the rdbms/databases/csv folder
+-- 3. make sure the pg container is running and attach to its shell 
+-- 4. create a table in the database using the below command
+-- # psql -U postgres
+-- postgres=# CREATE DATABASE sfpolice;
+-- poatgres=# \c sfpolice
+-- poatgres=# CREATE TABLE
+--     police_incident_reports (
+--         pd_id BIGINT,
+--         IncidentNum VARCHAR(10),
+--         "Incident Code" VARCHAR(10),
+--         Category VARCHAR(50),
+--         Descript VARCHAR(100),
+--         DayOfWeek VARCHAR(10),
+--         Date DATE,
+--         Time TIME,
+--         PdDistrict VARCHAR(10),
+--         Resolution VARCHAR(50),
+--         Address VARCHAR(100),
+--         X NUMERIC(9, 6),
+--         Y NUMERIC(9, 6),
+--         location VARCHAR(55),
+--         "SF Find Neighborhoods 2 2" FLOAT,
+--         "Current Police Districts 2 2" INT,
+--         "Current Supervisor Districts 2 2" INT,
+--         "Analysis Neighborhoods 2 2" INT,
+--         "DELETE - Fire Prevention Districts 2 2" INT,
+--         "DELETE - Police Districts 2 2" INT,
+--         "DELETE - Supervisor Districts 2 2" INT,
+--         "DELETE - Zip Codes 2 2" INT,
+--         "DELETE - Neighborhoods 2 2" INT,
+--         "DELETE - 2017 Fix It Zones 2 2" INT,
+--         "Civic Center Harm Reduction Project Boundary 2 2" INT,
+--         "Fix It Zones as of 2017-11-06 2 2" INT,
+--         "DELETE - HSOC Zones 2 2" INT,
+--         "Fix It Zones as of 2018-02-07 2 2" INT,
+--         "CBD, BID and GBD Boundaries as of 2017 2 2" INT,
+--         "Areas of Vulnerability, 2016 2 2" INT,
+--         "Central Market/Tenderloin Boundary 2 2" INT,
+--         "Central Market/Tenderloin Boundary Polygon - Updated 2 2" INT,
+--         "HSOC Zones as of 2018-06-05 2 2" INT,
+--         "OWED Public Spaces 2 2" INT,
+--         "Neighborhoods 2" INT
+--     );
+-- postgres=# \COPY police_incident_reports FROM '/usr/databases/csv/Police_Department_Incident_Reports__Historical_2003_to_May_2018.csv'  DELIMITER ',' CSV HEADER QUOTE '"';
+
 
 -- make sure you have a connection created using the vscode extension
 
 -- Exploring data
+
 -- 1. How many police districts are there?
 SELECT COUNT(DISTINCT pddistrict) FROM police_incident_reports;
 
 -- How many neighborhoods are there?
-SELECT COUNT(DISTINCT 'Neighborhoods 2") FROM police_incident_reports;
+SELECT COUNT(DISTINCT 'Neighborhoods 2') FROM police_incident_reports;
 
 -- How many incidents by neighborhood?
 SELECT "Neighborhoods 2", COUNT(*) AS COUNT FROM police_incident_reports GROUP BY "Neighborhoods 2" order by COUNT(*); -- Try to visualize in pgadmin

@@ -1,3 +1,5 @@
+-- https://www.w3schools.com/mysql/mysql_datatypes.asp
+-- https://dev.mysql.com/doc/refman/8.0/en/data-types.html 
 -- numeric data types
 -- bit, tinyint, smallint, int, bigint
 -- decimal, float, double
