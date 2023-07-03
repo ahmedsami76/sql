@@ -1,6 +1,10 @@
--- Active: 1687357724766@@mysql-db@3306
+
 -- this is a comment 
-SELECT 1+1; # this is a comment till the end of the line
+/* this is a multimline comment 
+    this is the second line
+*/
+
+SELECT 1+1; -- this is a comment till the end of the line
 SELECT 1+1; # this is a comment
 SELECT 1+1; /* this is a comment */
 SELECT 1+1; /* this is a comment
@@ -232,6 +236,27 @@ INNER JOIN film_category AS fc
 ON fc.category_id  = c.category_id
 INNER JOIN film AS f
 ON f.film_id = fc.film_id;
+
+-- ---
+-- complete join example
+-- ---
+create database testdb;
+use testdb;
+create table tbl1 (id int, name varchar(20));
+create table tbl2 (id int, title varchar(20));
+
+insert into tbl1 values (1, 'ahmed'), (2, 'aya'), (3, 'wegz'), (4, 'marwan');
+
+insert into tbl2 values (2, 'engineer'), (3, 'writer'), (4, 'rapper'), (5, 'doctor');
+
+SELECT * FROM testdb.tbl1;
+SELECT * FROM testdb.tbl2;
+
+select tbl1.*, tbl2.* from tbl1 inner join tbl2 using (id);
+select tbl1.*, tbl2.* from tbl1 left join tbl2 using (id);
+select tbl1.*, tbl2.* from tbl1 right join tbl2 using (id);
+select tbl1.*, tbl2.* from tbl1 cross join tbl2;
+-- --
 
 -- views
 --
