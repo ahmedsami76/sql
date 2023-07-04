@@ -1,4 +1,3 @@
--- Active: 1687357724766@@mysql-db@3306@sakila
 -- if elseif else 
 -- case when then else end
 -- while end while
@@ -8,25 +7,6 @@ SELECT title,
     price,
     if(price>3,'high','low') as rental_rate_status 
 FROM film_list;
-
--- use if stmt in functions or stored procedure
-
-CREATE FUNCTION fnComparePrice(p_price1 DECIMAL(5,2))
-RETURNS VARCHAR(30)
-DETERMINISTIC
-BEGIN
-    DECLARE v_result VARCHAR(30);
-
-    SET @avg = (SELECT AVG(price) FROM film_list);
-    IF p_price1 > @avg THEN
-        SET v_result = 'price1 is greater';
-    ELSE 
-        SET v_result = 'price1 is less';
-    END IF;
-    RETURN v_result;
-END;
-
-SELECT fnComparePrice(1.99);
 
 
 -- use case when then else end in sql statement
@@ -41,8 +21,38 @@ SELECT title,
 FROM film_list;
 
 
--- use case when then else end in functions or stored procedure
+
+-- use if stmt in functions or stored procedure
+
+DELIMITER $$
 CREATE FUNCTION fnComparePrice(p_price1 DECIMAL(5,2))
+RETURNS VARCHAR(30)
+DETERMINISTIC
+BEGIN
+    DECLARE v_result VARCHAR(30);
+
+    SET @avg = (SELECT AVG(price) FROM film_list);
+    IF p_price1 > @avg THEN
+        SET v_result = 'price1 is greater';
+    ELSE 
+        SET v_result = 'price1 is less';
+    END IF;
+    RETURN v_result;
+END $$
+DELIMITER ;
+
+use sakila;
+SELECT AVG(price) FROM film_list;
+SELECT fnComparePrice(1.99);
+
+
+
+
+
+
+-- use case when then else end in functions or stored procedure
+DELIMITER $$
+CREATE FUNCTION fnComparePrice2(p_price1 DECIMAL(5,2))
 RETURNS VARCHAR(30)
 DETERMINISTIC
 BEGIN
@@ -55,9 +65,16 @@ BEGIN
         ELSE 'price1 is equal'
     END;
     RETURN v_result;
-END;
+END $$
+DELIMITER ;
+
+
 
 -- while end while 
+-- WHILE condition DO
+--     statements;
+-- END WHILE;
+
 
 CREATE PROCEDURE dowhile()
 BEGIN 
@@ -67,5 +84,6 @@ BEGIN
         SELECT v_counter;
     END WHILE;
 END;
+
 
 CALL dowhile();
