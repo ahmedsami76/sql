@@ -5,7 +5,7 @@
 -- foreign key
 
 -- column indexes
--- HEAP - table scan
+--
 
 DROP DATABASE IF EXISTS testdb;
 CREATE DATABASE IF NOT EXISTS testdb;
@@ -23,6 +23,9 @@ DESC t1;
 -- other ways to define index
 CREATE INDEX idx_first_name ON t1 (first_name);
 
+-- drop index
+
+DROP INDEX idx_first_name ON t1;
 -- insert some rows
 INSERT INTO t1 VALUES (1, 'ahmed'), (2, 'aya'), (3, 'john'),
                       (4, 'sami'), (5, 'fekri'), (6, 'michael'),

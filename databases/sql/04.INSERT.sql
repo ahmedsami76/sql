@@ -11,6 +11,7 @@ DESC t1;
 
 -- insert values into table t1
 INSERT INTO t1 VALUES (1, 'ahmed');
+SELECT * from t1;
 
 -- insert mutliple values into table t1
 INSERT INTO t1 VALUES (2, 'aya'), (3, 'john');
@@ -27,6 +28,8 @@ INSERT INTO t2 SELECT * FROM t1;
 INSERT INTO t2 (id, first_name) VALUES ('10', 'Tamer');
 INSERT INTO t2 (first_name, id) VALUES ('Hany', '11');
 -- INSERT INTO t2 (id, first_name) SELECT id, first_name FROM t1;
+
+SELECT * from t2;
 
 -- insert into table t2 using SET
 INSERT INTO t2 SET id = 4, first_name = 'wegz';

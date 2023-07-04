@@ -1,6 +1,7 @@
 -- Active: 1687117690530@@mysql-db@3306@testdb
 show databases;
 
+DROP DATABASE IF EXISTS testdb;
 CREATE DATABASE IF NOT EXISTS testdb;
 
 
@@ -55,6 +56,7 @@ INSERT INTO t4 (first_name) VALUES ('sami'), ('aya');
 
 -- insert a row with id
 INSERT INTO t4 VALUES (10, 'ali');
+INSERT INTO t4 (first_name) VALUES ('hasan');
 
 -- check the auto increment value
 SHOW VARIABLES LIKE 'auto_increment%';
@@ -74,7 +76,7 @@ INSERT INTO t5 (first_name) VALUES ('ahmed');
 
 -- insert a row with first_name length <= 4
 INSERT INTO t5 (first_name) VALUES ('ali'); -- error
-
+TABLE t5;
 -- drop constraint
 ALTER TABLE t5 DROP CONSTRAINT id_unique;
 
@@ -82,7 +84,7 @@ ALTER TABLE t5 DROP CONSTRAINT id_unique;
 CREATE TABLE t6 (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     first_name VARCHAR(20),
-    CONSTRAINT id_unique UNIQUE (id),
+    CONSTRAINT id_unique UNIQUE (id)
     );
 
 -- another way to define primary key
@@ -119,5 +121,10 @@ TABLE t7;
 
 -- insert a row with non-existing id
 INSERT INTO t7 VALUES (4, 'Math'); -- error
+DROP TABLE t1;
+DROP TABLE t2;
+DROP TABLE t3;
+DROP TABLE t4;
+DROP TABLE t5;
 
 -- reverse engineer in mysql workbench
