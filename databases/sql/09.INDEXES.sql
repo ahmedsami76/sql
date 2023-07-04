@@ -5,7 +5,7 @@
 -- foreign key
 
 -- column indexes
---
+-- HEAP - table scan
 
 DROP DATABASE IF EXISTS testdb;
 CREATE DATABASE IF NOT EXISTS testdb;
