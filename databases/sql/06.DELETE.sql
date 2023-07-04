@@ -1,4 +1,6 @@
+-- Active: 1688236555284@@mysql-db@3306@testdb
 -- delete all rows from the t1
+USE testdb;
 DELETE FROM t1;
 
 DELETE * FROM t1;
