@@ -27,6 +27,7 @@ END;
 SELECT fnAge('1990-01-01');
 
 -- A function to calculate the area of a circle
+DELIMITER $$
 CREATE FUNCTION fnArea(p_radius DECIMAL(5,2))
 RETURNS DECIMAL(10,2)
 DETERMINISTIC
@@ -34,7 +35,8 @@ BEGIN
     DECLARE v_area DECIMAL(10,2);
     SET v_area = PI() * p_radius * p_radius;
     RETURN v_area;
-END;
+END $$
+DELIMITER ;
 
 SELECT fnArea(5);
 

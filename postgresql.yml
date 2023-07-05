@@ -7,7 +7,7 @@ services:
     container_name: pg-db
     hostname: pg-db
     environment:
-      POSTGRES_PASSWORD: P@ssw0rd
+      POSTGRES_PASSWORD: P@ssw0rd # the username is postgres
     volumes:
       - ./databases:/usr/databases
 

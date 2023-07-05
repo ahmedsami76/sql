@@ -1,4 +1,4 @@
--- Active: 1687366929633@@pg-db@5432@testdb
+-- Active: 1688525394700@@pg-db@5432@testdb
 SELECT version();
 
 SHOW server_version;
@@ -24,7 +24,8 @@ CREATE TABLE t2 AS SELECT * FROM t1;
 SHOW COLUMNS FROM t1; -- ERROR 
 DESC t1; -- ERROR
 -- equivalent to SHOW COLUMNS FROM t1; in MySQL
-SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 't1';
+SELECT column_name, data_type, table_name FROM information_schema.columns;
+--WHERE table_name = 't1';
 
 
 -----------------------
@@ -36,12 +37,12 @@ INSERT INTO t1 VALUES (1, 'ahmed');
 INSERT INTO t1 VALUES (2, 'aya'), (3, 'john');
 
 -- create a table t2 based on t1
-CREATE TABLE t2 AS TABLE t1;
+CREATE TABLE t3 AS TABLE t1;
 
 -- create a new table type 
 CREATE TYPE t1_type AS (id int, first_name varchar(30));
 -- create a table based on that TYPE
-CREATE TABLE t3 OF t1_type;
+CREATE TABLE t4 OF t1_type;
 
 -- create a new data type
 CREATE DOMAIN t1_domain AS varchar(30);
