@@ -185,6 +185,12 @@ Select DISTINCT category, count(incidentnum) over(partition by category) from po
 -- running count of pd_id by incident category
 SELECT pd_id, category, count(pd_id) over(partition by category order by pd_id) from public.police_incident_reports;
 
+-- the most ocurring category by year
+SELECT category, date_part('year', date) as year, count(category) over(partition by date_part('year', date) order by count(category) desc) from public.police_incident_reports;
+
+
+
+
 -- row_number()
 -- return a unique number for each row
 select *, row_number() over() from police_incident_reports
