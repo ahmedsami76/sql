@@ -1,3 +1,4 @@
+-- Active: 1688525394700@@pg-db@5432@sfpolice
 -- 1. get the data from the below link
 ----  https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry/data
 -- 2. save the csv file in the rdbms/databases/csv folder
@@ -6,46 +7,82 @@
 -- # psql -U postgres
 -- postgres=# CREATE DATABASE sfpolice;
 -- poatgres=# \c sfpolice
--- poatgres=# CREATE TABLE
---     police_incident_reports (
---         pd_id BIGINT,
---         IncidentNum VARCHAR(10),
---         "Incident Code" VARCHAR(10),
---         Category VARCHAR(50),
---         Descript VARCHAR(100),
---         DayOfWeek VARCHAR(10),
---         Date DATE,
---         Time TIME,
---         PdDistrict VARCHAR(10),
---         Resolution VARCHAR(50),
---         Address VARCHAR(100),
---         X NUMERIC(9, 6),
---         Y NUMERIC(9, 6),
---         location VARCHAR(55),
---         "SF Find Neighborhoods 2 2" FLOAT,
---         "Current Police Districts 2 2" INT,
---         "Current Supervisor Districts 2 2" INT,
---         "Analysis Neighborhoods 2 2" INT,
---         "DELETE - Fire Prevention Districts 2 2" INT,
---         "DELETE - Police Districts 2 2" INT,
---         "DELETE - Supervisor Districts 2 2" INT,
---         "DELETE - Zip Codes 2 2" INT,
---         "DELETE - Neighborhoods 2 2" INT,
---         "DELETE - 2017 Fix It Zones 2 2" INT,
---         "Civic Center Harm Reduction Project Boundary 2 2" INT,
---         "Fix It Zones as of 2017-11-06 2 2" INT,
---         "DELETE - HSOC Zones 2 2" INT,
---         "Fix It Zones as of 2018-02-07 2 2" INT,
---         "CBD, BID and GBD Boundaries as of 2017 2 2" INT,
---         "Areas of Vulnerability, 2016 2 2" INT,
---         "Central Market/Tenderloin Boundary 2 2" INT,
---         "Central Market/Tenderloin Boundary Polygon - Updated 2 2" INT,
---         "HSOC Zones as of 2018-06-05 2 2" INT,
---         "OWED Public Spaces 2 2" INT,
---         "Neighborhoods 2" INT
---     );
+poatgres=# CREATE TABLE
+    police_incident_reports (
+        pd_id BIGINT,
+        IncidentNum VARCHAR(10),
+        "Incident Code" VARCHAR(10),
+        Category VARCHAR(50),
+        Descript VARCHAR(100),
+        DayOfWeek VARCHAR(10),
+        Date DATE,
+        Time TIME,
+        PdDistrict VARCHAR(10),
+        Resolution VARCHAR(50),
+        Address VARCHAR(100),
+        X NUMERIC(9, 6),
+        Y NUMERIC(9, 6),
+        location VARCHAR(55),
+        "SF Find Neighborhoods 2 2" FLOAT,
+        "Current Police Districts 2 2" INT,
+        "Current Supervisor Districts 2 2" INT,
+        "Analysis Neighborhoods 2 2" INT,
+        "DELETE - Fire Prevention Districts 2 2" INT,
+        "DELETE - Police Districts 2 2" INT,
+        "DELETE - Supervisor Districts 2 2" INT,
+        "DELETE - Zip Codes 2 2" INT,
+        "DELETE - Neighborhoods 2 2" INT,
+        "DELETE - 2017 Fix It Zones 2 2" INT,
+        "Civic Center Harm Reduction Project Boundary 2 2" INT,
+        "Fix It Zones as of 2017-11-06 2 2" INT,
+        "DELETE - HSOC Zones 2 2" INT,
+        "Fix It Zones as of 2018-02-07 2 2" INT,
+        "CBD, BID and GBD Boundaries as of 2017 2 2" INT,
+        "Areas of Vulnerability, 2016 2 2" INT,
+        "Central Market/Tenderloin Boundary 2 2" INT,
+        "Central Market/Tenderloin Boundary Polygon - Updated 2 2" INT,
+        "HSOC Zones as of 2018-06-05 2 2" INT,
+        "OWED Public Spaces 2 2" INT,
+        "Neighborhoods 2" INT
+    );
 -- postgres=# \COPY police_incident_reports FROM '/usr/databases/csv/Police_Department_Incident_Reports__Historical_2003_to_May_2018.csv'  DELIMITER ',' CSV HEADER QUOTE '"';
 
+-- what is the data?
+SELECT 
+	pd_id, 
+	incidentnum, 
+	"Incident Code", 
+	category, 
+	descript, 
+	dayofweek, 
+	date, 
+	"time", 
+	pddistrict, 
+	resolution, 
+	address, 
+	x, 
+	y, 
+	location, 
+	"SF Find Neighborhoods 2 2", 
+	"Current Police Districts 2 2", 
+	"Current Supervisor Districts 2 2", 
+	"Analysis Neighborhoods 2 2"
+-- 	"Civic Center Harm Reduction Project Boundary 2 2", 
+-- 	"Fix It Zones as of 2017-11-06 2 2", 
+-- 	"Fix It Zones as of 2018-02-07 2 2", 
+-- 	"CBD, BID and GBD Boundaries as of 2017 2 2", 
+-- 	"Areas of Vulnerability, 2016 2 2", 
+-- 	"Central Market/Tenderloin Boundary 2 2", 
+-- 	"Central Market/Tenderloin Boundary Polygon - Updated 2 2", 
+-- 	"HSOC Zones as of 2018-06-05 2 2", 
+-- 	"OWED Public Spaces 2 2", 
+-- 	"Neighborhoods 2"
+	FROM public.police_incident_reports LIMIT 100;
+
+-- date span
+SELECT DATE_PART('year', max(date)) - DATE_PART('year', min(date))  FROM public.police_incident_reports
+
+-- drop columns marked to be deleted
 
 -- make sure you have a connection created using the vscode extension
 
@@ -145,6 +182,8 @@ Select category, count(incidentnum) over(partition by category) from police_inci
 -- You must add DISTINCT statement to the above to get the equivalent to Group By
 Select DISTINCT category, count(incidentnum) over(partition by category) from police_incident_reports 
 
+-- running count of pd_id by incident category
+SELECT pd_id, category, count(pd_id) over(partition by category order by pd_id) from public.police_incident_reports;
 
 -- row_number()
 -- return a unique number for each row
