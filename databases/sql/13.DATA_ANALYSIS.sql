@@ -62,11 +62,11 @@ SELECT
 	address, 
 	x, 
 	y, 
-	location, 
-	"SF Find Neighborhoods 2 2", 
-	"Current Police Districts 2 2", 
-	"Current Supervisor Districts 2 2", 
-	"Analysis Neighborhoods 2 2"
+	location 
+-- 	"SF Find Neighborhoods 2 2", 
+-- 	"Current Police Districts 2 2", 
+-- 	"Current Supervisor Districts 2 2", 
+-- 	"Analysis Neighborhoods 2 2"
 -- 	"Civic Center Harm Reduction Project Boundary 2 2", 
 -- 	"Fix It Zones as of 2017-11-06 2 2", 
 -- 	"Fix It Zones as of 2018-02-07 2 2", 
@@ -80,7 +80,7 @@ SELECT
 	FROM public.police_incident_reports LIMIT 100;
 
 -- date span
-SELECT DATE_PART('year', max(date)) - DATE_PART('year', min(date))  FROM public.police_incident_reports
+SELECT DATE_PART('year', max(date)) , DATE_PART('year', min(date))  FROM public.police_incident_reports
 
 -- drop columns marked to be deleted
 
@@ -92,10 +92,10 @@ SELECT DATE_PART('year', max(date)) - DATE_PART('year', min(date))  FROM public.
 SELECT COUNT(DISTINCT pddistrict) FROM police_incident_reports;
 
 -- How many neighborhoods are there?
-SELECT COUNT(DISTINCT 'Neighborhoods 2') FROM police_incident_reports;
+SELECT COUNT('Neighborhoods 2') FROM police_incident_reports;
 
 -- How many incidents by neighborhood?
-SELECT "Neighborhoods 2", COUNT(*) AS COUNT FROM police_incident_reports GROUP BY "Neighborhoods 2" order by COUNT(*); -- Try to visualize in pgadmin
+SELECT "Neighborhoods 2" , COUNT(*) AS COUNT FROM police_incident_reports GROUP BY 1 order by COUNT(*); -- Try to visualize in pgadmin
 
 -- Check the min and max number of incidents by neighborhood
 SELECT MAX(s.COUNT) AS MAX, MIN(s.COUNT) AS MIN, AVG(s.COUNT) As AVG 
@@ -162,7 +162,7 @@ SELECT split_part(pd_id, '0', 1) FROM police_incident_reports LIMIT 3; -- Error 
 
 select * from public.police_incident_reports limit 5;
 
-select category, count(incidentnum) from police_incident_reports group by category
+select category, count(incidentnum) from police_incident_reports group by category;
 
 --What if I want to display the count of incidents by category but still see the rest of the columns in the table?
 
@@ -185,10 +185,14 @@ Select DISTINCT category, count(incidentnum) over(partition by category) from po
 -- running count of pd_id by incident category
 SELECT pd_id, category, count(pd_id) over(partition by category order by pd_id) from public.police_incident_reports;
 
+<<<<<<< HEAD
 -- the most ocurring category by year
 SELECT category, date_part('year', date) as year, count(category) over(partition by date_part('year', date) order by count(category) desc) from public.police_incident_reports;
 
 
+=======
+SELECT pd_id, category, concat(cast(count(pd_id) over(partition by category order by pd_id) AS text), '/', cast(count(incidentnum) over(partition by category) as text)) from public.police_incident_reports;
+>>>>>>> f1735f0 (updates to da)
 
 
 -- row_number()
