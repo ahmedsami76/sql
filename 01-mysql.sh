@@ -25,6 +25,9 @@ USE testdb;
 CREATE TABLE tbl1 (id INT, name VARCHAR(20));
 exit
 
+
+
+
 # Check the file structure after creating the database and the table
 cd /var/lib/mysql
 ls -l testdb
