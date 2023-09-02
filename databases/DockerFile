@@ -1,11 +1,11 @@
 FROM Ubuntu:latest 
-WORKDIR /src
+WORKDIR /src/
 RUN apt update -y 
 RUN apt upgrade -y 
 COPY . /src/
-RUN mysqldoc.sh 
-ENTRYPOINT [ "/bin/bash" ]
-CMD [ "mysql" ]
+RUN bash mysqldoc.sh 
+ENTRYPOINT [ "/bin/bash" , "-c" ]
+CMD [ "./mysqlrun.sh" ]
 
 
 
