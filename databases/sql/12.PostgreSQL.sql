@@ -3,6 +3,7 @@ SELECT version();
 
 SHOW server_version;
 
+SERIAl -- auto increment in postgres 
 
 SHOW data_directory;
 
@@ -11,6 +12,8 @@ create database testdb;
 select current_database();
 
 -- change current database in extension
+
+-- \c (in command line %% change database )
 
 use testdb; -- ERROR this does not work with PostgreSQL :(
 
@@ -38,7 +41,7 @@ INSERT INTO t1 VALUES (2, 'aya'), (3, 'john');
 
 -- create a table t2 based on t1
 CREATE TABLE t3 AS TABLE t1;
-
+CREATE TABLE t3 AS SELECT * FROM t1 ;
 -- create a new table type 
 CREATE TYPE t1_type AS (id int, first_name varchar(30));
 -- create a table based on that TYPE

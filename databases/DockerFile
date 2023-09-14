@@ -1,9 +1,15 @@
 FROM Ubuntu:latest 
-WORKDIR /src/
+WORKDIR /usr/local
+COPY ./Sql ./Sql
 RUN apt update -y 
 RUN apt upgrade -y 
-COPY . /src/
+RUN ["apt", "install", "-y","open-ssh"]
+RUN apt install 
+RUN wget ""
 RUN bash mysqldoc.sh 
+ENV MySql_Root_Passwoed="Password" MySql_Root_user="root"
+ENV SQL_Path "value"
+ARG name=defaultValue
 ENTRYPOINT [ "/bin/bash" , "-c" ]
 CMD [ "./mysqlrun.sh" ]
 

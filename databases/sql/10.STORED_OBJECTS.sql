@@ -6,7 +6,7 @@
 -- functions
 --
 
--- create function
+-- create function (user-define)
 
 -- CREATE FUNCTION func_name (param1 type, param2 type, ...) RETURNS type
 -- BEGIN
@@ -15,6 +15,26 @@
 
 
 -- A function to calculate age
+DELIMITER $$
+CREATE FUNCTION fn_Age(STU_ID)
+RETURNS INT 
+DETERMINISTIC 
+DECLARE V_Age Date , Age INT
+BEGIN
+    SET V_Age = (SELECT Birth_date FROM Student WHERE STU_ID = id );
+    SET AGE = (Year(CURDATE() - YEAR(V_Age)));
+
+    RETURNS Age ;
+
+END $$
+
+DELIMITER ; 
+
+
+Select fn_Age(3)
+
+
+
 CREATE FUNCTION fnAge(p_birth_date DATE)
 RETURNS INT
 DETERMINISTIC

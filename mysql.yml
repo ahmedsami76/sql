@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
   
   jupyter:
-    image: asami76/allspark:latest
+    image: allspark/ .
     container_name: jupyter
     hostname: jupyter
     environment:
