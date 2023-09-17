@@ -47,6 +47,14 @@ CREATE TYPE t1_type AS (id int, first_name varchar(30));
 -- create a table based on that TYPE
 CREATE TABLE t4 OF t1_type;
 
+ 
+CREATE TABLE t4
+(
+    last_name VARCHAR(30) ,
+    phone CHAR(15)
+)
+ OF t1_type;
+
 -- create a new data type
 CREATE DOMAIN t1_domain AS varchar(30);
 
