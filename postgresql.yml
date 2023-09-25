@@ -30,7 +30,7 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ./databases:/home/jovyan/
+      - ./databases:/home/jovyan/work
     ports:
       - 8888:8888
     restart: unless-stopped

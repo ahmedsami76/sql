@@ -4,7 +4,7 @@
 -- 2. save the csv file in the rdbms/databases/csv folder
 -- 3. make sure the pg container is running and attach to its shell 
 -- 4. create a table in the database using the below command
--- # psql -U postgres
+-- # psql -U postgres -h (hostname) 
 -- postgres=# CREATE DATABASE sfpolice;
 -- poatgres=# \c sfpolice
 poatgres=# CREATE TABLE
@@ -63,24 +63,30 @@ SELECT
 	x, 
 	y, 
 	location 
--- 	"SF Find Neighborhoods 2 2", 
--- 	"Current Police Districts 2 2", 
--- 	"Current Supervisor Districts 2 2", 
--- 	"Analysis Neighborhoods 2 2"
--- 	"Civic Center Harm Reduction Project Boundary 2 2", 
--- 	"Fix It Zones as of 2017-11-06 2 2", 
--- 	"Fix It Zones as of 2018-02-07 2 2", 
--- 	"CBD, BID and GBD Boundaries as of 2017 2 2", 
--- 	"Areas of Vulnerability, 2016 2 2", 
--- 	"Central Market/Tenderloin Boundary 2 2", 
--- 	"Central Market/Tenderloin Boundary Polygon - Updated 2 2", 
--- 	"HSOC Zones as of 2018-06-05 2 2", 
--- 	"OWED Public Spaces 2 2", 
--- 	"Neighborhoods 2"
+	-- "SF Find Neighborhoods 2 2", 
+	-- "Current Police Districts 2 2", 
+	-- "Current Supervisor Districts 2 2", 
+	-- "Analysis Neighborhoods 2 2"
+	-- "Civic Center Harm Reduction Project Boundary 2 2", 
+	-- "Fix It Zones as of 2017-11-06 2 2", 
+	-- "Fix It Zones as of 2018-02-07 2 2", 
+	-- "CBD, BID and GBD Boundaries as of 2017 2 2", 
+	-- "Areas of Vulnerability, 2016 2 2", 
+	-- "Central Market/Tenderloin Boundary 2 2", 
+	-- "Central Market/Tenderloin Boundary Polygon - Updated 2 2", 
+	-- "HSOC Zones as of 2018-06-05 2 2", 
+	-- "OWED Public Spaces 2 2", 
+	-- "Neighborhoods 2"
 	FROM public.police_incident_reports LIMIT 100;
 
 -- date span
 SELECT DATE_PART('year', max(date)) , DATE_PART('year', min(date))  FROM public.police_incident_reports
+
+SELECT YEAR(max(Date)) - YEAR(min(Date))
+FROM public.police_incident_reports
+
+
+-- SELECT Year(MAX(Date) , DATE_PART('year', min(date))  FROM public.police_incident_reports
 
 -- drop columns marked to be deleted
 
@@ -97,11 +103,13 @@ SELECT COUNT('Neighborhoods 2') FROM police_incident_reports;
 -- How many incidents by neighborhood?
 SELECT "Neighborhoods 2" , COUNT(*) AS COUNT FROM police_incident_reports GROUP BY 1 order by COUNT(*); -- Try to visualize in pgadmin
 
--- Check the min and max number of incidents by neighborhood
+-- Check the min and max number of incidents by neighborhood (sub-queries)
 SELECT MAX(s.COUNT) AS MAX, MIN(s.COUNT) AS MIN, AVG(s.COUNT) As AVG 
 FROM (
     SELECT "Neighborhoods 2" AS Neighborhood, COUNT(*) FROM police_incident_reports GROUP BY "Neighborhoods 2" order by COUNT(*)
     ) s;
+
+
 
 
 -- KPIs for incidents by neighborhood
@@ -122,6 +130,23 @@ BEGIN
     return average;
 END;
 $$ LANGUAGE plpgsql;
+
+-- -- CREATE FUNCTION average_no()
+-- -- DETERMINISTIC 
+-- -- RETURNS  DECIMAL(5,2)
+
+-- -- DECLARE Avg
+-- -- BEGIN
+-- --     SET @AVG = SELECT AVG(s.count)
+--                 FROM 
+--                 (
+--                     SELECT "Neighborhoods 2" AS Neighborhood, COUNT(*) FROM police_incident_reports GROUP BY "Neighborhoods 2" order by COUNT(*)
+
+--                 )s ;
+--         RETURNS @AVG;
+
+
+
 
 select avergae_no_of_incidents()
 
@@ -208,7 +233,7 @@ select category, pddistrict, date, row_number() over(partition by category order
 -- show the first 2 incidents by category and pddistrict
 -- use subquery
 select * from (
-	select category, pddistrict, date, (row_number() over(partition by category order by date)) as rn  from police_incident_reports 
+	select category, pddistrict, date, (row_number() over(partition by category order by date DESC )) as rn  from police_incident_reports 
 ) x
 where x.rn < 3
 
@@ -290,7 +315,7 @@ SELECT
     last_name,
     department_id,
     salary,
-    RANK() OVER(partition by department_id ORDER BY salary DESC) rank
+    RANK() OVER(partition by department_id ORDER BY salary DESC) as  rank
 FROM
     employees;
 

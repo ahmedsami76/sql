@@ -27,6 +27,24 @@ SELECT title,
 FROM film_list;
 
 
+-- SELECT title , id , CASE 
+--     WHEN (price> 3) THEN ''
+--     WHEN price < 3 THEN '' 
+--     ELSE  
+-- END  AS 
+-- FROM film_list
+
+
+SELECT Stu_id , Name , IF(salary>5000, 'Hight' , 'low')
+
+SELECT Stu_id , Name , CASE 
+    WHEN Salary > 5000 THEN 'hight'  
+    
+    WHEN Salary < 5000 THEN 'low'
+    ELSE  'equal' As Salary_check
+END
+
+
 
 -- use if stmt in functions or stored procedure
 

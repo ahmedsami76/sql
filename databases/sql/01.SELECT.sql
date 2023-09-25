@@ -51,6 +51,10 @@ SELECT 'Hello, SQL' LIKE 'Hello, SQL';
 SELECT 'Hello, SQL' LIKE 'Hello, %';
 
 
+SELECT CONCAT(first_name + '' + last_name) As FullName , CASE 
+    WHEN LENGTH(first_Name > 3 ) THEN 'greather name'  
+    ELSE  ''
+END 
 
 -- charactersets and collations
 SELECT 'a' =  'ä';
@@ -157,6 +161,10 @@ SELECT actor_id, first_name FROM actor LIMIT 50, 10;
 (SELECT actor_id, first_name FROM actor LIMIT 5, 10)
 UNION 
 (SELECT actor_id, first_name FROM actor LIMIT 50 , 10);
+
+SELECT c.category_ID , , c.author , c.name  OVER(dense() PARTITION BY c.name ) FROM category AS c group by c.name 
+
+SELECT categortid , (category_name :: varchar(20)) FROM category WHERE 
 
 -- where clause
 SELECT * FROM film_text;
@@ -268,3 +276,14 @@ INNER JOIN film_category AS fc
 ON fc.category_id  = c.category_id
 INNER JOIN film AS f
 ON f.film_id = fc.film_id;
+
+
+CREATE View vw_film
+AS
+    SELECT *
+    FROM Categoey AS c
+    INNER JOIN film_cateogery AS fc 
+    USING (categoeryID); 
+
+SELECT * 
+FROM vw_film , 
