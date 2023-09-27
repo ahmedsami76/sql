@@ -1,6 +1,6 @@
 -- Active: 1688525394700@@pg-db@5432@sfpolice
 -- 1. get the data from the below link
-----  https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry/data
+--  https://data.sfgov.org/Public-Safety/Police-Department-Incident-Reports-Historical-2003/tmnf-yvry/data
 -- 2. save the csv file in the rdbms/databases/csv folder
 -- 3. make sure the pg container is running and attach to its shell 
 -- 4. create a table in the database using the below command
@@ -45,6 +45,8 @@ poatgres=# CREATE TABLE
         "OWED Public Spaces 2 2" INT,
         "Neighborhoods 2" INT
     );
+
+-- SOURCE /usr/local/databases/csv
 -- postgres=# \COPY police_incident_reports FROM '/usr/databases/csv/Police_Department_Incident_Reports__Historical_2003_to_May_2018.csv'  DELIMITER ',' CSV HEADER QUOTE '"';
 
 -- what is the data?

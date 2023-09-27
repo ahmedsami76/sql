@@ -7,8 +7,16 @@ CREATE TABLE Employee
     EmployeeID INT PRIMARY Key AUTO_Increment, 
 
 );
+-- Show 
 
-Show VIEW From (Table name)
+DELIMITER $$
+SHOW DATABASE ; 
+SHOW Tables From (Database name ) ;
+SHOW Column From (Table name) ;
+Show VIEW From (Table name) ; 
+END $$
+DELIMITER ;  
+
 RENAME TABLE Employee TO Teacher ;
 
 DROP Table Teacher ;
@@ -22,8 +30,8 @@ FROM Teacher ;
 
 TABLE Teacher ;
 
-SELECT Instuctors LIKE Teacher ;
-SELECT Instuctors AS SELECT * From Teacher ;
+SELECT Instuctors LIKE Teacher ;  # Copy meta data from instructors into teacher
+SELECT Instuctors AS SELECT * From Teacher ; # standralization  
 
 
 CREATE VIEW vw_modify_email
@@ -35,7 +43,7 @@ ALTER Table Employee Modify Column Email varchar(50);
 
 SELECT (Email::int)  --casting 
 
-SELECT CAST(Email AS varchar(20));
+SELECT CAST(Email AS varchar(20)); #standarlization 
 Alter TABLE Employee Modify COLUMN Email int ;
 
 ALTER Table Employee MODIFY Email AFTER EMployeeID ; 
@@ -95,11 +103,13 @@ CREATE Table t1
 );
 
 /* For forget UNIQUE when create table  */
-ALter Table t1  ADD CONSTRAINT UNIQUE (id)  ;
+ALter Table t1  ADD CONSTRAINT UNIQUE (id) ,  
+CHECK(id >= 15) ;
 
 
 CREATE Table t2
 (
+    first_Name char(20) , 
     CONSTRAINT cnst_first_name UNIQUE(first_name), 
     CHECK(LENGTH(first_Name) > 3) 
 );
@@ -113,8 +123,8 @@ CREATE Table t6 (
         price decimal(5,2) Default 0.0 
 ); 
 
-
-ALter Table t6 Alter set default 0.0 ;
+#another way to set a default 
+ALter Table t6 Alter price  set default 0.0 ;
 
 
 INSERT
@@ -137,7 +147,7 @@ CREATE TABLE t7
 
 INSERT
 INTO t7(transaction_id , tramsaction_name)
-VALUES(5, 'jajds')
+VALUES(5, 'dsd')
 
 
 --Primary key 
@@ -147,7 +157,17 @@ CREATE Table t8
     student_id char(10) PRIMARY KEY Auto_increment , 
     name char(20), 
     constraint ct_stuid PRIMARY KEY (student_id)
-)
+);
+
+INSERT 
+INTO t8 
+VALUES ('Mohamed') , ('Mostafa') , ('Ismail') ;
+
+
+INSERT 
+INTO t8 
+VALUES (100 , 'Hazem');
+
 
 Alter TABLE t8 Auto_increment = 100 ;  --treat with run time for table 
 INSERT
