@@ -1,5 +1,5 @@
 ####
-docker run --rm -it -v $(pwd)/databases:/usr/databases ubuntu:latest bash
+docker run --rm -it -v $(pwd)/databases:/usr/databases ubuntu:latest bash 
 
 # Install MySQL from root user
 apt update && apt full-upgrade -y
