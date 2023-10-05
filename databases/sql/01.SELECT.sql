@@ -29,7 +29,7 @@ SELECT "'This is a quoted text'"; -- embed different qoutes
 SELECT "\'This is a quoted text\'";
 SELECT "This is a single quote \' and this is a doublequote \"";
 SELECT "Line 1\nLine 2\nLine 3";
-SELECT "This is a path in windows C:\\my\\folder\\path";
+SELECT "This is a path in windows C:\\my\\folder\\path"";
 
 -- arithmetic
 SELECT 1 + 2;

@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
   mysql-db:
     image: mysql:latest
     container_name: mysql-db
@@ -9,7 +8,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
-      - ./databases:/usr/databases
+      - ./database:/usr/database
     ports:
       - 3306:3306
       - 33060:33060
