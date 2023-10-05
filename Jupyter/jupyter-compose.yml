@@ -11,7 +11,12 @@ services:
     volumes: 
       ./Jupyter/notebooks:home/jovyan/work
 
-      
+    networks:
+      - counter-net
+
+networks :
+  - counter-net
+
 
 
 

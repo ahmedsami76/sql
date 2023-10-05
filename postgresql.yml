@@ -2,12 +2,13 @@ version: '3.7'
 
 services:  
   pg-db:
-    image: postgres
+    image: postgres 
     restart: always
     container_name: pg-db
     hostname: pg-db
     environment:
       POSTGRES_PASSWORD: P@ssw0rd # the username is postgres
+    Ports: 5432:5432
     volumes:
       - ./databases:/usr/databases
 
@@ -29,7 +30,7 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ./databases:/home/jovyan/
+      - ./databases:/home/jovyan/work
     ports:
       - 8888:8888
     restart: unless-stopped
@@ -47,4 +48,6 @@ services:
     ports:
       - "5050:80"
 
-    
+
+
+
