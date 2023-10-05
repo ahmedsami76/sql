@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
   
   jupyter:
-    image: allspark/ .
+    image: asami76/allspark:latest
     container_name: jupyter
     hostname: jupyter
     environment:
