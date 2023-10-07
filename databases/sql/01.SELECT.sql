@@ -1,3 +1,4 @@
+-- Active: 1696511689987@@mysql-db@3306@sakila
 
 -- this is a comment 
 /* this is a multimline comment 
@@ -277,13 +278,10 @@ ON fc.category_id  = c.category_id
 INNER JOIN film AS f
 ON f.film_id = fc.film_id;
 
-
-CREATE View vw_film
+CREATE VIEW vm_file_film 
 AS
-    SELECT *
-    FROM Categoey AS c
-    INNER JOIN film_cateogery AS fc 
-    USING (categoeryID); 
+Select a.actor_id , a.first_name
+FROM actor as a
 
-SELECT * 
-FROM vw_film , 
+SELECT *
+FROM vm_file_film 

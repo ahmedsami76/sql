@@ -1,10 +1,14 @@
+-- Active: 1696530498112@@mysql-db@3306@mytest
 DROP DATABASE IF EXISTS mytest ;
 CREATE DATABASE IF NOT EXISTS mytest ;
+
+use mytest ;
 Alter DATABASE mytest READ ONLY = 0 ;
 
-CREATE TABLE Employee
+CREATE TABLE employee
 (
-    EmployeeID INT PRIMARY Key AUTO_Increment, 
+    id INT PRIMARY Key AUTO_Increment ,
+    name char(20) 
 
 );
 -- Show 
@@ -41,7 +45,7 @@ ALTER Table Employee RENAME Column Phone TO Email CHAR(10);
 
 ALTER Table Employee Modify Column Email varchar(50);
 
-SELECT (Email::int)  --casting 
+SELECT (Email::int)  --casting (postgres)
 
 SELECT CAST(Email AS varchar(20)); #standarlization 
 Alter TABLE Employee Modify COLUMN Email int ;
