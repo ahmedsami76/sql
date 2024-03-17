@@ -1,3 +1,0 @@
-
-service mysql start
-mysql 

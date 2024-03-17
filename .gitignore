@@ -6,3 +6,4 @@
 **/databases/.jupyter/**
 **/databases/.ipython/**
 **/databases/csv/**
+**DockerFile**
