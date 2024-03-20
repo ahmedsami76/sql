@@ -1,10 +1,9 @@
--- Active: 1697989080864@@pg-db@5432@sfc_police
+-- Active: 1710700875312@@pg-db@5432@sfcpolice
 CREATE TABLE police
 (
          pd_id BIGINT,
         IncidentNum VARCHAR(10),
         "Incident Code" VARCHAR(10),
-        
         Category VARCHAR(50),
         Descript VARCHAR(100),
         DayOfWeek VARCHAR(10),
@@ -38,3 +37,7 @@ CREATE TABLE police
         "OWED Public Spaces 2 2" INT,
         "Neighborhoods 2" INT
 );
+
+-- DESCRIBE police ;
+
+SHOW COLUMNS FROM police ;
