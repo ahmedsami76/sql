@@ -24,7 +24,7 @@ DELIMITER ;
 RENAME TABLE Employee TO Teacher ;
 
 DROP Table Teacher ;
-
+# effect in meta data 
 Alter Table Employee ADD Phone varchar(50) ;
 
 -- ALTER TABLE Employee ADD Phone char(20) ;
@@ -46,6 +46,9 @@ ALTER Table Employee RENAME Column Phone TO Email CHAR(10);
 ALTER Table Employee Modify Column Email varchar(50);
 
 SELECT (Email::int)  --casting (postgres)
+
+SELECT (Email::int )
+
 
 SELECT CAST(Email AS varchar(20)); #standarlization 
 Alter TABLE Employee Modify COLUMN Email int ;
