@@ -1,8 +1,10 @@
+-- Active: 1696511689987@@mysql-db@3306@sakila
 
 -- this is a comment 
 /* this is a multimline comment 
     this is the second line
 */
+# this is line 
 
 SELECT 1+1; -- this is a comment till the end of the line
 SELECT 1+1; # this is a comment
@@ -17,7 +19,7 @@ SELECT 'Hello, SQL'; -- single quotes for strings
 
 SELECT "Hello, SQL"; -- double quotes for strings
 
-SELECT "My", "name", "is", "Ahmed"; -- select multiple values
+SELECT "My", "name", "is", "Hazem"; -- select multiple values
 
 SELECT 1, "Test"; -- select different data types
 
@@ -29,7 +31,7 @@ SELECT "'This is a quoted text'"; -- embed different qoutes
 SELECT "\'This is a quoted text\'";
 SELECT "This is a single quote \' and this is a doublequote \"";
 SELECT "Line 1\nLine 2\nLine 3";
-SELECT "This is a path in windows C:\\my\\folder\\path";
+SELECT "This is a path in windows C:\\my\\folder\\path"";
 
 -- arithmetic
 SELECT 1 + 2;
@@ -50,6 +52,10 @@ SELECT 'Hello, SQL' LIKE 'Hello, SQL';
 SELECT 'Hello, SQL' LIKE 'Hello, %';
 
 
+SELECT CONCAT(first_name + '' + last_name) As FullName , CASE 
+    WHEN LENGTH(first_Name > 3 ) THEN 'greather name'  
+    ELSE  ''
+END 
 
 -- charactersets and collations
 SELECT 'a' =  'ä';
@@ -156,6 +162,10 @@ SELECT actor_id, first_name FROM actor LIMIT 50, 10;
 (SELECT actor_id, first_name FROM actor LIMIT 5, 10)
 UNION 
 (SELECT actor_id, first_name FROM actor LIMIT 50 , 10);
+
+SELECT c.category_ID , , c.author , c.name  OVER(dense() PARTITION BY c.name ) FROM category AS c group by c.name 
+
+SELECT categortid , (category_name :: varchar(20)) FROM category WHERE 
 
 -- where clause
 SELECT * FROM film_text;
@@ -267,3 +277,11 @@ INNER JOIN film_category AS fc
 ON fc.category_id  = c.category_id
 INNER JOIN film AS f
 ON f.film_id = fc.film_id;
+
+CREATE VIEW vm_file_film 
+AS
+Select a.actor_id , a.first_name
+FROM actor as a
+
+SELECT *
+FROM vm_file_film 

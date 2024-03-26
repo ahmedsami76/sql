@@ -1,3 +1,4 @@
+-- Active: 1696530498112@@mysql-db@3306@sakila
 -- if elseif else 
 -- case when then else end
 -- while end while
@@ -25,6 +26,24 @@ SELECT title,
         ELSE 'low'
     END AS rental_rate_status
 FROM film_list;
+
+
+-- SELECT title , id , CASE 
+--     WHEN (price> 3) THEN ''
+--     WHEN price < 3 THEN '' 
+--     ELSE  
+-- END  AS 
+-- FROM film_list
+
+
+SELECT Stu_id , Name , IF(salary>5000, 'Hight' , 'low')
+
+SELECT Stu_id , Name , CASE 
+    WHEN Salary > 5000 THEN 'hight'  
+    
+    WHEN Salary < 5000 THEN 'low'
+    ELSE  'equal' As Salary_check
+END
 
 
 

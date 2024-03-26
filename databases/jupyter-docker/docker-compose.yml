@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  jupyter-scipy:
+    image: jupyter/scipy-notebook:latest
+    container_name: jupyterscipy
+    hostname: jupyter-scipy 
+    ports:
+      - 8888:8888
+    volumes:
+      - ./databases/jupyter-docker:/home/jovyan/work
+
+      

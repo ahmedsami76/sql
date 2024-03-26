@@ -1,5 +1,5 @@
 ####
-docker run --rm -it -v $(pwd)/databases:/usr/databases ubuntu:latest bash
+docker run --rm -it -v $(pwd)/databases:/usr/databases ubuntu:latest bash 
 
 # Install MySQL from root user
 apt update && apt full-upgrade -y
@@ -24,6 +24,9 @@ CREATE DATABASE testdb;
 USE testdb;
 CREATE TABLE tbl1 (id INT, name VARCHAR(20));
 exit
+
+
+
 
 # Check the file structure after creating the database and the table
 cd /var/lib/mysql
