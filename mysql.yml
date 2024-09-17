@@ -6,7 +6,6 @@ services:
     image: mysql:latest
     container_name: mysql-db
     hostname: mysql-db
-    command: --default-authentication-plugin=mysql_native_password
     restart: always
     volumes:
       - ./databases:/usr/databases
