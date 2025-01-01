@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   mysql-db:
-    image: mysql:latest
+    image: mysql:8.0.40-debian
     container_name: mysql-db
     hostname: mysql-db
     command: --default-authentication-plugin=mysql_native_password
